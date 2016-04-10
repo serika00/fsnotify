@@ -28,6 +28,7 @@ const (
 	Remove
 	Rename
 	Chmod
+	CloseWrite
 )
 
 // String returns a string representation of the event in the form
@@ -44,6 +45,9 @@ func (e Event) String() string {
 	}
 	if e.Op&Write == Write {
 		buffer.WriteString("|WRITE")
+	}
+	if e.Op&CloseWrite == CloseWrite {
+		buffer.WriteString("|CLOSE_WRITE")
 	}
 	if e.Op&Rename == Rename {
 		buffer.WriteString("|RENAME")
